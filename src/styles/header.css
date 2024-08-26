@@ -1,0 +1,100 @@
+/* Pagrindinis header stilius */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Užtikrina, kad kūno aukštis būtų 100% */
+}
+/* Pagrindinis header stilius */
+header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100vw;
+    text-align: center;
+    margin: 0;
+    overflow: hidden;
+    /* Pagrindinis gradientinis fonas */
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.5), 
+        rgba(0, 0, 0, 0.5)
+    ), 
+    url('../assets/backgroud-1.jpg'); /* Nuoroda į paveikslėlį */
+    background-size: cover; /* Užtikrina, kad paveikslėlis užimtų visą elementą */
+    background-position: center; /* Centruoja paveikslėlį */
+    background-repeat: no-repeat; /* Neleidžia paveikslėliui kartotis */
+}
+
+/* Jei naudojate img tagą, pašalinkite jį arba pritaikykite šiuos stilius */
+.header-img {
+    display: none; /* Paslėpkite paveikslėlį, nes dabar jį nustatome kaip foną */
+}
+
+/* Navbar stilius */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    background-color: rgba(255, 255, 255, 0.8); /* Šiek tiek skaidrumo, kad matytųsi fonas */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Šiek tiek šešėlio */
+    z-index: 1000; /* Užtikrina, kad navbar būtų viršuje */
+}
+
+/* Kiti stiliai */
+.logo {
+    font-size: 1.5em;
+}
+
+.menu {
+    flex-grow: 1;
+}
+
+.menu-inner {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.menu-item {
+    margin: 0 15px;
+}
+
+.menu-link {
+    text-decoration: none;
+    color: #000;
+}
+
+h1 {
+    font-size: 2em;
+    margin: 20px 0;
+}
+
+.review-tag-highlight {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.header-register {
+    margin-top: 20px;
+}
+
+.header-register a {
+    text-decoration: none;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.header-register a:hover {
+    background-color: #0056b3;
+}

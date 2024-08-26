@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import AppRoutes from './routes/AppRoutes';
 import RegisterPopup from './components/RegisterPopup';
+import './styles/main.css';
 
 function App() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
