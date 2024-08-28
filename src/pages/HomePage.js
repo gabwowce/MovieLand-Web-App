@@ -1,13 +1,13 @@
 // src/pages/HomePage.js
 import React from 'react';
+import '../styles/homePage.css';
 
 function HomePage({ openPopup }) {
   return (
-    <div>
+    <section className='home'>
       <h1>Welcome to the Home Page</h1>
       <p>This is the main page of your website.</p>
-      <button onClick={openPopup}>Register</button>
-    </div>
+    </section>
   );
 }
 

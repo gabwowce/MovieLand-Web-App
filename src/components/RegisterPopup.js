@@ -1,13 +1,15 @@
 // src/components/RegisterPopup.js
 import React from 'react';
+import { useHeaderContext } from '../context/HeaderContext';
 
-function RegisterPopup({ isOpen, onClose }) {
-  if (!isOpen) return null; // Nerodomas, jei `isOpen` yra false
+function RegisterPopup() {
+  const { isPopupOpen, closePopup } = useHeaderContext();
+  if (!isPopupOpen) return null; 
 
   return (
-    <div style={styles.overlay}>
-      <div style={styles.popup}>
-        <button style={styles.closeButton} onClick={onClose}>X</button>
+    <div className="popup" style={styles.overlay}>
+      <div className="popup-content" style={styles.popup}>
+        <button style={styles.closeButton} onClick={closePopup}>X</button>
         <h2>Register</h2>
         <form>
           <label>

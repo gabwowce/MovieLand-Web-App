@@ -5,6 +5,8 @@ import Footer from './components/Footer';
 import AppRoutes from './routes/AppRoutes';
 import RegisterPopup from './components/RegisterPopup';
 import './styles/main.css';
+import { HeaderProvider } from './context/HeaderContext';
+import {ScrollProvider} from './context/ScrollContext';
 
 function App() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -18,12 +20,17 @@ function App() {
   };
 
   return (
-    <Router>
-      <Header openPopup={openPopup} /> 
-      <AppRoutes openPopup={openPopup} /> 
-      <Footer />
-      <RegisterPopup isOpen={isPopupOpen} onClose={closePopup} />
-    </Router>
+    <ScrollProvider>
+      <Router>
+        <HeaderProvider>
+          <Header/> 
+          <RegisterPopup/>
+        </HeaderProvider>
+        <AppRoutes /> 
+        <Footer />
+      </Router>
+    </ScrollProvider>
+   
   );
 }
 

@@ -1,0 +1,26 @@
+
+/* Pagrindinis header stilius */
+.home {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    overflow: hidden;
+    /* Pagrindinis gradientinis fonas */
+    background: url('../assets/Background-5-updated.png'); /* Nuoroda į paveikslėlį */
+    background-size: 100% 100%; /* Užtikrina, kad paveikslėlis užimtų visą elementą */
+
+    background-position: top;
+    background-repeat: no-repeat; /* Neleidžia paveikslėliui kartotis */
+}
+
+
+@media (max-width: 1388px) {
+    .home {
+        background-size: 100% 100%; /* Užtikrina, kad fonas tęsiasi horizontaliai */
+       
+    }
+}
