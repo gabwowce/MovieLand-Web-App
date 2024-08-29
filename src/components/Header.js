@@ -12,6 +12,7 @@ import SearchIcon from '../assets/search.svg'
 function Header() {
   const { openPopup } = useHeaderContext();
   const { isScrolled } = useScrollContext(); 
+  const [isMenuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleReviewGridWidth = () =>{
@@ -42,12 +43,10 @@ function Header() {
 
     const toggleNav = () => {
       mobileNav.classList.toggle("hamburger-active");
-      navbar.classList.toggle("active");
-      // Log class name changes
-      console.log('Menubar class names:', navbar.className);
+      setIsMenuOpen(prev => !prev);
     };
 
-    if (mobileNav) {
+     if (mobileNav) {
       mobileNav.addEventListener("click", toggleNav);
     }
 
@@ -57,6 +56,24 @@ function Header() {
       }
     };
   }, []);
+
+  useEffect(() => {
+    const navbar = document.querySelector(".menubar");
+    if (!navbar) return;
+
+    // Reset all classes first
+    navbar.className = "menubar";
+
+    if (isMenuOpen) {
+      navbar.classList.add("menubar-active");
+    }
+
+    if (isScrolled && isMenuOpen) {
+      navbar.classList.add("menubar-active-scrolled");
+    }
+
+    console.log('Menubar class names:', navbar.className);
+  }, [isScrolled, isMenuOpen]);
 
 
 
@@ -89,7 +106,7 @@ function Header() {
             </div>
         </div>
       </nav>
-      <div className={`menubar ${isScrolled ? 'menubar-active-scrolled' : ''}`}>
+      <div className="menubar">
       <ul>
           <li>
               <Link to="/" className="menu-link">Home</Link>
