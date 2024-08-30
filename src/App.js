@@ -7,6 +7,7 @@ import RegisterPopup from './components/RegisterPopup';
 import './styles/main.css';
 import { HeaderProvider } from './context/HeaderContext';
 import {ScrollProvider} from './context/ScrollContext';
+import { MoviesProvider } from './context/MoviesContext';
 
 function App() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -26,7 +27,9 @@ function App() {
           <Header/> 
           <RegisterPopup/>
         </HeaderProvider>
-        <AppRoutes /> 
+        <MoviesProvider>
+          <AppRoutes /> 
+        </MoviesProvider>
         <Footer />
       </Router>
     </ScrollProvider>

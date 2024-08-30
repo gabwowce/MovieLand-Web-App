@@ -1,0 +1,143 @@
+.movie {
+    width: 230px;
+    height: 307px;
+    margin: 15px;
+  
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    border: none;
+  
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
+   
+  }
+
+  .movie::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 0.9));
+    opacity: 0; /* Paslėpta nuo pradžių */
+    transition: opacity 0.4s cubic-bezier(0.175, 0.885, 0, 1);
+    z-index: 1; /* Užtikrina, kad overlay būtų virš nuotraukos */
+  }
+  
+  .movie:hover::before {
+    opacity: 1; /* Matomas overlay, kai hover */
+  }
+
+  
+  .movie div:nth-of-type(1) {
+    position: absolute;
+
+    width: 100%;
+    opacity: 0;
+    top: 0;
+    color: #f9d3b4;
+  }
+  
+  .movie:hover {
+    box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(16px);
+    transform: scale(1.05, 1.05);
+  }
+  
+  .movie div:nth-of-type(2) {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .movie div:nth-of-type(2) img {
+    height: 100%;
+    width: 100%;
+  }
+  
+  .movie div:nth-of-type(3) {
+    z-index: 2;
+    height: 60px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    visibility: collapse;
+  }
+  
+  .movie div:nth-of-type(3) span {
+    font-family: "Raleway", sans-serif;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 500;
+    color: #f0f0f0;
+  }
+  
+  .movie div:nth-of-type(3) h3 {
+    margin-top: 0px;
+    font-family: "Roboto Slab", serif;
+    color: white;
+  }
+  
+  .movie:hover div:nth-of-type(2) {
+    height: 100%;
+    opacity: 1;
+    backdrop-filter: blur(10px);
+  }
+  
+  .movie:hover div:nth-of-type(3) {
+    visibility: visible;
+  }
+  
+  .movie:hover div:nth-of-type(1) {
+    opacity: 1;
+  }
+  
+
+@media (max-width: 1750px) {
+  .movie{
+    width: 215px;
+    height: 287px;
+    margin: 15px;
+  }
+}
+
+
+@media (max-width: 1080px) {
+  .movie{
+    width: 180px;
+    height: 240px;
+    margin: 15px;
+  }
+}
+
+  
+@media (max-width: 785px) {
+  .movie{
+    width: 180px;
+    height: 240px;
+    margin: 12px;
+  }
+}
+
+
+@media (max-width: 700px) {
+  .movie{
+    width: 180px;
+    height: 240px;
+    margin: 12px;
+  }
+
+}
+
+
+@media (max-width: 450px) {
+  .movie{
+    width: 130px;
+    height: 173px;
+    margin: 5px;
+  }
+
+}
+

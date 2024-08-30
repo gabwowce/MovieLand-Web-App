@@ -37,13 +37,14 @@ function Header() {
     };
   }, []);
 
+
   useEffect(() => {
     const mobileNav = document.querySelector(".hamburger");
     const navbar = document.querySelector(".menubar");
 
     const toggleNav = () => {
       mobileNav.classList.toggle("hamburger-active");
-      setIsMenuOpen(prev => !prev);
+      setMenuOpen(prev => !prev);
     };
 
      if (mobileNav) {
@@ -88,10 +89,10 @@ function Header() {
               <Link to="/" className="menu-link">Home</Link>
             </li>
             <li className="menu-item">
-              <Link to="/about" className="menu-link">About</Link>
+              <Link to="/movies" className="menu-link">Movies</Link>
             </li>
             <li className="menu-item">
-              <Link to="/contact" className="menu-link">Contact</Link>
+              <Link to="/about" className="menu-link">About</Link>
             </li>
           </ul>
         </div>
@@ -112,10 +113,10 @@ function Header() {
               <Link to="/" className="menu-link">Home</Link>
           </li>
           <li>
-              <Link to="/about" className="menu-link">About</Link>
+              <Link to="/movies" className="menu-link">Movies</Link>
           </li>
           <li>
-              <Link to="/contact" className="menu-link">Contact</Link>
+              <Link to="/about" className="menu-link">About</Link>
           </li>
         </ul>
       </div>
