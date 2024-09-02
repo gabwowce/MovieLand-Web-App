@@ -3,62 +3,58 @@ import axios from 'axios';
 import '../styles/homePage.css';
 import MovieCard from '../components/MovieCard';
 import { useState, useEffect } from 'react';
-import { useMoviesContext } from '../context/MoviesContext';
+import ScrollingAd from '../components/ScrollingAd';
+import {useMoviesContext} from '../context/MoviesContext'
+import { useScrollingAdsContext } from '../context/AdContext';
+import Carousel from '../components/Carousel';
 
 function HomePage() {
 
-  const {section1Movies, section2Movies, section3Movies} = useMoviesContext();
+  const { vibrantSection, fierySection, midnightSection, generateScrollingAds } = useScrollingAdsContext();
+  const { sectionMovies } = useMoviesContext();
 
-  useEffect(()=>{
-    const handleMoviesConteinerMargin = () => {
-      const logo = document.getElementById("site-logo");
-      const specMoviesConteiners = document.querySelectorAll(".spec-movies");
-      if (logo) {
-        const rect = logo.getBoundingClientRect();
-        const logoX = rect.left;
-        console.log('Logo X coordinate:', logoX);
+  // useEffect(()=>{
+  //   const handleMoviesConteinerMargin = () => {
+  //     const logo = document.getElementById("site-logo");
+  //     const MoviesConteiners = document.querySelectorAll(".spec-movies");
+  //     if (logo) {
+  //       const rect = logo.getBoundingClientRect();
+  //       const logoX = rect.left;
+  //       console.log('Logo X coordinate:', logoX);
   
-        specMoviesConteiners.forEach(container => {
-          container.style.margin = `0 ${logoX}px`;
-        });
-      } else {
-        console.log('Error: logo not found');
-      }
-    };
-    handleMoviesConteinerMargin();
-    window.addEventListener('resize', handleMoviesConteinerMargin);
+  //       MoviesConteiners.forEach(container => {
+  //         container.style.gridTemplateColumns = `${logoX+200}px auto ${logoX+200}px`;
+  //       });
+  //     } else {
+  //       console.log('Error: logo not found');
+  //     }
+  //   };
+  //   handleMoviesConteinerMargin();
+  //   window.addEventListener('resize', handleMoviesConteinerMargin);
 
-    return () => {
-      window.removeEventListener('resize', handleMoviesConteinerMargin);
-    };
+  //   return () => {
+  //     window.removeEventListener('resize', handleMoviesConteinerMargin);
+  //   };
     
-  },[])
+  // },[])
 
   return (
     <section className='movies'>
       <section id='top-section-movies' className='promoted-movies'>
-        {/* <h1>Promoted Movies</h1>
-        <h2>Check out these trending movies, specially selected and highlighted for you. 
-          Discover your next favorite film!</h2> */}
+          <Carousel/>
       </section>
 
       <section id='section-1-movies' className='spec-movies'>
-        <div className='movie-section-title'>
-          <h1>Laughs & Adventures</h1>
-          <div className='belt'>
-            <h2 className='scrolling-text'>
-              Feel-good movies that will bring a smile to your face and joy to your heart.
-              Feel-good movies that will bring a smile to your face and joy to your heart.
-            </h2>
-          
+          <h1 className='title-text'>Laughs & Adventures</h1>
+          <div className='belt' id="vibrantSection">
+              {generateScrollingAds(vibrantSection)}
           </div>
-        </div>
        
         {
-          section1Movies?.length > 0
+          sectionMovies.section1?.length > 0
           ? (
             <div className="movie-conteiner">
-              {section1Movies.map((movie) =>(
+              {sectionMovies.section1?.map((movie) =>(
                 <MovieCard movie={movie}/>
               ))}
             </div>
@@ -72,23 +68,16 @@ function HomePage() {
       </section>
 
       <section id='section-2-movies' className='spec-movies'>
-        <div className='movie-section-title'>
-          <h1>Epic Journeys</h1>
-          <div className='belt'>
-            <h2 className='scrolling-text'>
-              Action-packed adventures that will keep you on the edge of your seat.
-
-            </h2>
-          
-          </div>
-         
+        <h1 className='title-text'>Epic Journeys</h1>
+        <div className='belt' id="fierySection">
+            {generateScrollingAds(fierySection)}
         </div>
        
         {
-          section2Movies?.length > 0
+          sectionMovies.section2?.length > 0
           ? (
             <div className="movie-conteiner">
-              {section2Movies.map((movie) =>(
+              {sectionMovies.section2?.map((movie) =>(
                 <MovieCard movie={movie}/>
               ))}
             </div>
@@ -102,16 +91,16 @@ function HomePage() {
       </section>
 
       <section id='section-2-movies' className='spec-movies'>
-        <div className='movie-section-title'>
-          <h1>Dark Tales & Chilling Thrills</h1>
-          <h2>Explore the intense, the dramatic, and the terrifying in these gripping films.</h2>
+         <h1 className='title-text'>Dark Tales & Chilling Thrills</h1>
+         <div className='belt' id="midnightSection">
+            {generateScrollingAds(midnightSection)} 
         </div>
         
         {
-          section3Movies?.length > 0
+          sectionMovies.section3?.length > 0
           ? (
             <div className="movie-conteiner">
-              {section3Movies.map((movie) =>(
+              {sectionMovies.section3?.map((movie) =>(
                 <MovieCard movie={movie}/>
               ))}
             </div>

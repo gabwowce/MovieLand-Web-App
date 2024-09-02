@@ -8,6 +8,7 @@ import './styles/main.css';
 import { HeaderProvider } from './context/HeaderContext';
 import {ScrollProvider} from './context/ScrollContext';
 import { MoviesProvider } from './context/MoviesContext';
+import { AdProvider } from './context/AdContext';
 
 function App() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -28,7 +29,9 @@ function App() {
           <RegisterPopup/>
         </HeaderProvider>
         <MoviesProvider>
-          <AppRoutes /> 
+          <AdProvider>
+            <AppRoutes/> 
+          </AdProvider>
         </MoviesProvider>
         <Footer />
       </Router>

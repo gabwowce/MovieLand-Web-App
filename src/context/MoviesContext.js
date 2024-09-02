@@ -1,19 +1,17 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import config from '../config';
 
 export const MoviesContext = createContext();
 
 export const MoviesProvider = ({children})=>{
     const [allMovies, setAllMovies] = useState([]);
-    const [topSectionMovies, setTopSectionMovies] = useState([]);
-    const [section1Movies, setSection1Movies] = useState([]);
-    const [section2Movies, setSection2Movies] = useState([]);
-    const [section3Movies, setSection3Movies] = useState([]);
+    const [sectionMovies, setSectionMovies] = useState({});
     const [year, setYear] = useState(2024);
 
     const fetchMovies = async () => {
         try {
-          const response = await axios.get(`http://localhost:3002/movies`); 
+          const response = await axios.get(`${config.baseURL}/movies`); 
           setAllMovies(response.data);
         } catch (error) {
           console.error('Error fetching movies:', error);
@@ -22,7 +20,7 @@ export const MoviesProvider = ({children})=>{
     
     const fetchMoviesByYear = async (year) => {
         try{
-            const response = await axios.get(`http://localhost:3002/movies/year/${year}`);
+            const response = await axios.get(`${config.baseURL}/movies/year/${year}`);
             return response.data;
         } catch (error) {
             console.error('Error fetching movies by year:', error);
@@ -31,7 +29,7 @@ export const MoviesProvider = ({children})=>{
 
     const fetchMoviesByYearAndCategory = async (year, category) => {
         try{
-            const url = `http://localhost:3002/movies/filter?year=${encodeURIComponent(year || '')}&category=${encodeURIComponent(category || '')}`;
+            const url = `${config.baseURL}/movies/filter?year=${encodeURIComponent(year || '')}&category=${encodeURIComponent(category || '')}`;
             const response = await axios.get(url);
             return response.data;
         } catch (error) {
@@ -39,28 +37,45 @@ export const MoviesProvider = ({children})=>{
         }
     }
 
-    useEffect(()=>{
-        const loadMovies = async () => {
-            await fetchMovies();
-            const moviesBy2024 = await fetchMoviesByYear(2024);
-
-            const fetchMoviesForSections = async () =>{
-                const comedyMovies = await fetchMoviesByYearAndCategory('','Animation');
-                const actionMovies = await fetchMoviesByYearAndCategory('','Action');
-                const dramaMovies = await fetchMoviesByYearAndCategory('','Drama');
-
-                setSection1Movies(comedyMovies.slice(0,10));
-                setSection2Movies(actionMovies.slice(0,10));
-                setSection3Movies(dramaMovies.slice(0,10));
+    useEffect(() => {
+        const loadMoviesForSections = async () => {
+            const sections = {
+                'section1': ["Animation", "Comedy", "Family"],
+                'section2': ["Adventure", "Action", "Sci-Fi"],
+                'section3': ["Thriller", "Horror", "Drama"]
             };
-            fetchMoviesForSections();
-        };
-        loadMovies();
-    }, []);
 
+            const newSectionMovies = {};
+
+            for (const [section, categories] of Object.entries(sections)) {
+                // Fetch movies for all categories in the section
+                const moviesPromises = categories.map(category =>
+                    fetchMoviesByYearAndCategory('', category)
+                );
+
+                try {
+                    const moviesResults = await Promise.all(moviesPromises);
+                    // Flatten and combine the movies from all categories
+                    const combinedMovies = moviesResults.flat();
+                    // Remove duplicates based on movie ID
+                    const uniqueMovies = Array.from(new Set(combinedMovies.map(movie => movie.id)))
+                        .map(id => combinedMovies.find(movie => movie.id === id));
+
+                    newSectionMovies[section] = uniqueMovies.slice(0, 12); // Adjust the slice based on your needs
+                } catch (error) {
+                    console.error(`Error fetching movies for ${section}:`, error);
+                    newSectionMovies[section] = []; // Handle errors by setting an empty array
+                }
+            }
+
+            setSectionMovies(newSectionMovies);
+        };
+
+        loadMoviesForSections();
+    }, []); // Empty dependency array ensures this runs only once
 
     return (
-    <MoviesContext.Provider value={{ section1Movies, section2Movies, section3Movies, fetchMoviesByYear, fetchMoviesByYearAndCategory }}>
+    <MoviesContext.Provider value={{ sectionMovies, fetchMoviesByYear, fetchMoviesByYearAndCategory }}>
         {children}
     </MoviesContext.Provider>
     );
