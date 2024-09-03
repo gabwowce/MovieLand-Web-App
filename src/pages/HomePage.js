@@ -7,6 +7,7 @@ import ScrollingAd from '../components/ScrollingAd';
 import {useMoviesContext} from '../context/MoviesContext'
 import { useScrollingAdsContext } from '../context/AdContext';
 import Carousel from '../components/Carousel';
+import CarouselCard from '../components/CarouselCard';
 
 function HomePage() {
 
@@ -41,7 +42,8 @@ function HomePage() {
   return (
     <section className='movies'>
       <section id='top-section-movies' className='promoted-movies'>
-          <Carousel/>
+        <h1 className='title-text'>Top Movies of the Week</h1>
+        <Carousel movies={sectionMovies.section2} />
       </section>
 
       <section id='section-1-movies' className='spec-movies'>

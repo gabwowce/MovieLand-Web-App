@@ -1,0 +1,199 @@
+:root {
+  --dynamic-color: 21, 70, 86; /* Default color if image fails to load */
+}
+.carousel-card {
+    width: 700px;
+    height: 450px;
+    margin: 15px;
+    position: relative; /* Užtikrina, kad .movie-card-info būtų teisingai pozicionuota */
+    border-radius: 20px;
+    overflow: hidden;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
+    box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, 0.5);
+  }
+  
+  .carousel-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to left, 
+                                rgba(var(--dynamic-color-rgb), 0.1),
+                                rgba(var(--dynamic-color-rgb), 0.1),
+                                rgba(var(--dynamic-color-rgb), 0.3), 
+                                rgba(var(--dynamic-color-rgb), 1),
+                                rgba(var(--dynamic-color-rgb), 1),
+                                rgba(var(--dynamic-color-rgb), 1),
+                                rgb(var(--dynamic-color-rgb), 1));
+    backdrop-filter: blur(30px);
+    opacity: 1;
+    transition: opacity 0.4s cubic-bezier(0.175, 0.885, 0, 1);
+    z-index: 1;
+}
+.carousel-card .blur-img{
+  width: 1000px;
+  height: 100vh;
+}
+
+.carousel-card-info img{
+  position: absolute;
+  top: -5px;
+  left: -350px;
+}
+  .carousel-card-img {
+    width: 330px;
+    height: 470px;
+    position: relative;
+  }
+  .carousel-card-img::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right,
+                        rgba(var(--dynamic-color-rgb), 0.01), 
+                        rgba(var(--dynamic-color-rgb), 0.04),
+                        rgb(var(--dynamic-color-rgb)));
+    z-index: 2;
+}
+  
+.carousel-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    z-index: 1;
+}
+
+/* .carousel-card:hover {
+    box-shadow: 20px 20px 45px 0 rgba(0, 0, 0, 0.9);
+  } */
+
+  
+  .carousel-card-info {
+    opacity: 1;
+    position: absolute;
+    top: 10%; 
+    right: 4%;
+    width: 50%;
+    padding: 15px; /* Priklauso nuo pageidaujamo tarpo */
+    box-sizing: border-box;
+    color: rgb(236, 231, 231);
+    z-index: 20; 
+    display: grid;
+    grid-template-columns: 1fr 2fr auto 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+        "title title title title"
+        "release_year category star rating";
+    
+  }
+  
+  /* .carousel-card:hover .carousel-card-info {
+    opacity: 1;
+  } */
+  .carousel-rating-star{
+    grid-area: star;
+    width: 14px;
+    height: 14px;
+    margin-top: 3px;
+  }
+  
+  
+  .carousel-card-title {
+    grid-area: title;
+    align-self: start; /* Vertikaliai išdėsto elementą viršuje */
+    justify-self: start; /* Horizontalus išdėstymas kairėje */
+    text-align: left; /* Užtikrina, kad visos tekstinės eilutės būtų išlygintos kairėje */
+    margin-bottom: 10px;
+  }
+  
+  .carousel-card-rating {
+    grid-area: rating;
+    align-self: start; 
+    justify-self: start; 
+    text-align: right; 
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  
+  .carousel-card-category {
+    grid-area: category;
+    align-self: start; 
+    justify-self: start; 
+    text-align: left; 
+  }
+  
+  .carousel-card-release_year {
+    grid-area: release_year;
+    align-self: start;
+    justify-self: start; 
+    text-align: left; 
+  }
+  
+  .carousel-card-title h3 {
+    margin: 0;
+    font-weight: 900;
+    font-family: "New Amsterdam", sans-serif;
+    font-size: 46px;
+    text-align: left; /* Užtikrina, kad tekstas būtų išlygintas kairėje pusėje */
+   
+  }
+  .carousel-card-category h4,
+  .carousel-card-release_year h4{
+    margin: 0;
+    font-weight: 400;
+    font-family: "New Amsterdam", sans-serif;
+    font-size: 18px;
+  
+  }
+  
+  .carousel-card-rating h4{
+    margin: 0;
+    font-weight: 900;
+    font-family: "New Amsterdam", sans-serif;
+    font-size: 18px;;
+  
+  }
+  
+  
+  @media (max-width: 1750px) {
+  .carousel-card {
+    width: 215px;
+    height: 287px;
+    margin: 15px;
+  }
+  }
+  
+  @media (max-width: 1080px) {
+  .carousel-card {
+    width: 180px;
+    height: 240px;
+    margin: 15px;
+  }
+  }
+  
+  @media (max-width: 785px) {
+  .carousel-card {
+    width: 180px;
+    height: 240px;
+    margin: 12px;
+  }
+  }
+  
+  @media (max-width: 700px) {
+  .carousel-card {
+    width: 130px;
+    height: 173px;
+    margin: 5px;
+  }
+  }
+  

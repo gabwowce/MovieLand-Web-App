@@ -8,30 +8,30 @@ function RegisterPopup() {
   if (!isPopupOpen) return null; 
 
   return (
-    <div className="popup" >
-      <div className="popup-content" >
-        <button className="x-btn" onClick={closePopup}>X</button>
-        <h2>Register</h2>
-        <form>
-          <label>
-            Username:
-            <input type="text" name="username" />
-          </label>
-          <br />
-          <label>
-            Email:
-            <input type="email" name="email" />
-          </label>
-          <br />
-          <label>
-            Password:
-            <input type="password" name="password" />
-          </label>
-          <br />
-          <button type="submit">Register</button>
-        </form>
+    <div class="wrapper">
+    <form action="#">
+      <h2>Login Form</h2>
+        <div class="input-field">
+        <input type="text" required/>
+        <label>Enter your email</label>
       </div>
-    </div>
+      <div class="input-field">
+        <input type="password" required/>
+        <label>Enter your password</label>
+      </div>
+      <div class="forget">
+        <label for="remember">
+          <input type="checkbox" id="remember"/>
+          <p>Remember me</p>
+        </label>
+        <a href="#">Forgot password?</a>
+      </div>
+      <button type="submit">Log In</button>
+      <div class="register">
+        <p>Don't have an account? <a href="#">Register</a></p>
+      </div>
+    </form>
+  </div>
   );
 };
 
