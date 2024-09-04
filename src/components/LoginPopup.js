@@ -1,37 +1,25 @@
-// src/components/RegisterPopup.js
-import React from 'react';
+// src/components/LoginPopup.js
+import React, { useState } from 'react';
 import { useHeaderContext } from '../context/HeaderContext';
+import { useAuth } from '../context/AuthContext';
 import '../styles/registerPopup.css';
-import config from '../config';
 
 function LoginPopup() {
   const { isPopupOpen, closePopup } = useHeaderContext();
+  const { login } = useAuth(); 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  if (!isPopupOpen) return null; 
+
+  if (!isPopupOpen) return null;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    try {
-      const response = await fetch(`${config.baseURL}/auth/login`, { // Pakeiskite pagal savo API
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-      const result = await response.json();
 
-      if (response.ok) {
-        // Galite saugoti JWT į cookies arba localStorage
-        alert('Login successful');
-        closePopup();
-      } else {
-        alert(result.message || 'Login failed');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('An error occurred');
+    const success = await login(email, password); // Naudokite AuthContext prisijungimo funkciją
+
+    if (success) {
+      alert('Login successful');
+      closePopup();
     }
   };
 
@@ -65,6 +53,5 @@ function LoginPopup() {
     </div>
   );
 }
-
 
 export default LoginPopup;
