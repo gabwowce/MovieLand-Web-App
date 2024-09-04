@@ -10,36 +10,26 @@ function RegisterPopup() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const { isPopupOpen, closePopup } = useHeaderContext();
+  const { register } = useAuth();
   
   if (!isPopupOpen) return null; 
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(password !== confirmPassword){
-      alert('Passwords do not match!')
+    if (password !== confirmPassword) {
+      alert('Passwords do not match!');
       return;
     }
-    try{
-      const response = await fetch(`${config.baseURL}/auth/register`,{
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          body: JSON.stringify({ username, email, password }),
-      });
-      const result = await response.json();
-    if (response.ok) {
-        alert('Registration successful');
-        closePopup();
-      } else {
-        alert(result.message || 'Registration failed');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('An error occurred');
-    }
-  }
 
+    const success = await register(username, email, password);
+
+    if (success) {
+      alert('Registration successful');
+      closePopup();
+    }
+  };
+  
   return (
    <div class="wrapper">
     <form onSubmit={handleSubmit}>
