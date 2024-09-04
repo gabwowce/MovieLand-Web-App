@@ -41,79 +41,69 @@ function HomePage() {
 
   return (
     <section className='movies'>
-      <section id='top-section-movies' className='promoted-movies'>
-        <h1 className='title-text'>Top Movies of the Week</h1>
-        <Carousel movies={sectionMovies.section2} />
-      </section>
+      {
+        sectionMovies.section2?.length > 0 &&(
+          <section id='top-section-movies' className='promoted-movies'>
+            <h1 className='title-text'>Top Movies of the Week</h1>
+            <Carousel movies={sectionMovies.section2} />
+          </section>
+        )
+      }
+    
 
-      <section id='section-1-movies' className='spec-movies'>
-          <h1 className='title-text'>Laughs & Adventures</h1>
-          <div className='belt' id="vibrantSection">
-              {generateScrollingAds(vibrantSection)}
-          </div>
+        {
+          sectionMovies.section1?.length > 0 && (
+
+            <section id='section-1-movies' className='spec-movies'>
+              <h1 className='title-text'>Laughs & Adventures</h1>
+              <div className='belt' id="vibrantSection">
+                  {generateScrollingAds(vibrantSection)}
+              </div>
+
+              <div className="movie-conteiner">
+                {sectionMovies.section1?.map((movie) =>(
+                  <MovieCard movie={movie}/>
+                ))}
+              </div>
+
+              </section>
+          ) 
+
+        }
        
         {
-          sectionMovies.section1?.length > 0
-          ? (
-            <div className="movie-conteiner">
-              {sectionMovies.section1?.map((movie) =>(
-                <MovieCard movie={movie}/>
-              ))}
-            </div>
-          ) : 
-          (
-            <div className='empty'> 
-              <h2>No movies found</h2>
-            </div>
-          )
-        } 
-      </section>
+          sectionMovies.section2?.length > 0 &&(
 
-      <section id='section-2-movies' className='spec-movies'>
-        <h1 className='title-text'>Epic Journeys</h1>
-        <div className='belt' id="fierySection">
-            {generateScrollingAds(fierySection)}
-        </div>
-       
-        {
-          sectionMovies.section2?.length > 0
-          ? (
-            <div className="movie-conteiner">
-              {sectionMovies.section2?.map((movie) =>(
-                <MovieCard movie={movie}/>
-              ))}
-            </div>
-          ) : 
-          (
-            <div className='empty'> 
-              <h2>No movies found</h2>
-            </div>
-          )
-        } 
-      </section>
+            <section id='section-2-movies' className='spec-movies'>
+              <h1 className='title-text'>Epic Journeys</h1>
+              <div className='belt' id="fierySection">
+                  {generateScrollingAds(fierySection)}
+              </div>
 
-      <section id='section-2-movies' className='spec-movies'>
-         <h1 className='title-text'>Dark Tales & Chilling Thrills</h1>
-         <div className='belt' id="midnightSection">
-            {generateScrollingAds(midnightSection)} 
-        </div>
+              <div className="movie-conteiner">
+                {sectionMovies.section2?.map((movie) =>(
+                  <MovieCard movie={movie}/>
+                ))}
+              </div>
+            </section>
+          ) 
+        } 
         
         {
-          sectionMovies.section3?.length > 0
-          ? (
-            <div className="movie-conteiner">
-              {sectionMovies.section3?.map((movie) =>(
-                <MovieCard movie={movie}/>
-              ))}
-            </div>
-          ) : 
-          (
-            <div className='empty'> 
-              <h2>No movies found</h2>
-            </div>
-          )
+          sectionMovies.section3?.length > 0 &&(
+            <section id='section-2-movies' className='spec-movies'>
+              <h1 className='title-text'>Dark Tales & Chilling Thrills</h1>
+              <div className='belt' id="midnightSection">
+                  {generateScrollingAds(midnightSection)} 
+              </div>
+              <div className="movie-conteiner">
+                {sectionMovies.section3?.map((movie) =>(
+                  <MovieCard movie={movie}/>
+                ))}
+              </div>
+            </section>
+          ) 
         } 
-      </section>
     </section>
     
   );
