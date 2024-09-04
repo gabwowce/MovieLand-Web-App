@@ -3,7 +3,7 @@ import React from 'react';
 import { useHeaderContext } from '../context/HeaderContext';
 import '../styles/registerPopup.css';
 
-function RegisterPopup() {
+function LoginPopup() {
   const { isPopupOpen, closePopup } = useHeaderContext();
   if (!isPopupOpen) return null; 
 
@@ -37,4 +37,4 @@ function RegisterPopup() {
 
 
 
-export default RegisterPopup;
+export default LoginPopup;
