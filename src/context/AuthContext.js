@@ -47,6 +47,31 @@ export function AuthProvider({ children }) {
     }
   };
 
+  const register = async (username, email, password) => {
+    try {
+      const response = await fetch(`${config.baseURL}/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, email, password }),
+        credentials: 'include',
+      });
+      const result = await response.json();
+
+      if (response.ok) {
+        return true;
+      } else {
+        alert(result.message || 'Registration failed');
+        return false;
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred');
+      return false;
+    }
+  };
+
   const logout = async () => {
     try {
       await fetch(`${config.baseURL}/auth/logout`, {
@@ -61,7 +86,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );
