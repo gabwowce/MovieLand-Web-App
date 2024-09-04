@@ -10,7 +10,7 @@ function RegisterPopup() {
   return (
     <div class="wrapper">
     <form action="#">
-      <h2>Login Form</h2>
+      <h2>Login</h2>
         <div class="input-field">
         <input type="text" required/>
         <label>Enter your email</label>
