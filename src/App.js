@@ -9,32 +9,26 @@ import { HeaderProvider } from './context/HeaderContext';
 import {ScrollProvider} from './context/ScrollContext';
 import { MoviesProvider } from './context/MoviesContext';
 import { AdProvider } from './context/AdContext';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-  const openPopup = () => {
-    setIsPopupOpen(true);
-  };
-
-  const closePopup = () => {
-    setIsPopupOpen(false);
-  };
 
   return (
     <ScrollProvider>
-      <Router>
-        <HeaderProvider>
-          <Header/> 
-          <RegisterPopup/>
-        </HeaderProvider>
-        <MoviesProvider>
-          <AdProvider>
-            <AppRoutes/> 
-          </AdProvider>
-        </MoviesProvider>
-        <Footer />
-      </Router>
+      <AuthProvider>
+       <Router>
+          <HeaderProvider>
+            <Header/> 
+            <RegisterPopup/>
+          </HeaderProvider>
+          <MoviesProvider>
+            <AdProvider>
+              <AppRoutes/> 
+            </AdProvider>
+          </MoviesProvider>
+          <Footer />
+        </Router>
+      </AuthProvider>
     </ScrollProvider>
    
   );

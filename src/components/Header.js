@@ -8,8 +8,12 @@ import { useEffect, useState } from 'react';
 import { useHeaderContext } from '../context/HeaderContext';
 import {useScrollContext} from '../context/ScrollContext';
 import SearchIcon from '../assets/search.svg'
+import { useAuthContext } from '../context/AuthContext';
 
 function Header() {
+
+  const {user} = useAuthContext();
+  
   const { openPopup } = useHeaderContext();
   const { isScrolled } = useScrollContext(); 
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -120,12 +124,21 @@ function Header() {
           </li>
         </ul>
       </div>
-      <div className='header-review'>
-          <h1 className="review-tag-highlight">Track, rate, and review</h1>
-          <h2 className="review-tag">every film you watch. Organize your movie journey and share insights with others.</h2>
-          <button className="header-register-btn" onClick={openPopup}>Join for free!</button>
-      </div>
-     
+
+      {
+        user ? (
+           <div className='header-review'>
+              <h1 className="review-tag-highlight">Welcome back, {user.username}!</h1>
+          </div>
+        ) : (
+           <div className='header-review'>
+                <h1 className="review-tag-highlight">Track, rate, and review</h1>
+                <h2 className="review-tag">every film you watch. Organize your movie journey and share insights with others.</h2>
+                <button className="header-register-btn" onClick={openPopup}>Join for free!</button>
+            </div>
+        )
+      }
+
     </header>
   );
 }
