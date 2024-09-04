@@ -12,15 +12,6 @@ import { AdProvider } from './context/AdContext';
 import { AuthProvider } from './context/AuthContext';
 
 function App() {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-  const openPopup = () => {
-    setIsPopupOpen(true);
-  };
-
-  const closePopup = () => {
-    setIsPopupOpen(false);
-  };
 
   return (
     <ScrollProvider>
