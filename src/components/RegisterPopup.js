@@ -3,6 +3,7 @@ import React, {useState}from 'react';
 import { useHeaderContext } from '../context/HeaderContext';
 import '../styles/registerPopup.css';
 import config from '../config';
+import { useAuthContext } from '../context/AuthContext';
 
 function RegisterPopup() {
   const [username, setUsername] = useState('');
@@ -10,7 +11,7 @@ function RegisterPopup() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const { isPopupOpen, closePopup } = useHeaderContext();
-  const { register } = useAuth();
+  const { register } = useAuthContext();
   
   if (!isPopupOpen) return null; 
 
@@ -31,10 +32,10 @@ function RegisterPopup() {
   };
   
   return (
-   <div class="wrapper">
+   <div className="wrapper">
     <form onSubmit={handleSubmit}>
       <h2>Register</h2>
-      <div class="input-field">
+      <div className="input-field">
         <input 
           type="text" 
           required
@@ -43,7 +44,7 @@ function RegisterPopup() {
         />
         <label>Enter your username</label>
       </div>
-      <div class="input-field">
+      <div className="input-field">
         <input 
           type="text" 
           required
@@ -52,7 +53,7 @@ function RegisterPopup() {
         />
         <label>Enter your email</label>
       </div>
-      <div class="input-field">
+      <div className="input-field">
         <input 
           type="password" 
           required
@@ -61,7 +62,7 @@ function RegisterPopup() {
         />
         <label>Enter your password</label>
       </div>
-      <div class="input-field">
+      <div className="input-field">
         <input 
           type="password" 
           required
@@ -71,7 +72,7 @@ function RegisterPopup() {
         <label>Repeat your password</label>
       </div>
       <button type="submit">Register</button>
-      <div class="login">
+      <div className="login">
         <p>Already have an account? <a href="#" onClick={closePopup}>Log In</a></p>
       </div>
     </form>
