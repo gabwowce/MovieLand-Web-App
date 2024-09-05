@@ -9,6 +9,22 @@ export const MoviesProvider = ({children})=>{
     const [sectionMovies, setSectionMovies] = useState({});
     const [year, setYear] = useState(2024);
 
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+
+    const checkServerStatus = async () => {
+        try {
+            const response = await axios.get(`${config.baseURL}/api/status`);
+            if (response.data.status !== 'ok') {
+                throw new Error('Server is down');
+            }
+        } catch (err) {
+            setError('Server is down');
+        }
+    };
+    
+
     const fetchMovies = async () => {
         try {
           const response = await axios.get(`${config.baseURL}/movies`); 
@@ -55,8 +71,10 @@ export const MoviesProvider = ({children})=>{
 
                     newSectionMovies[section] = uniqueMovies.slice(0, 12); // Adjust the slice based on your needs
                 } catch (error) {
-                    console.error(`Error fetching movies for ${section}:`, error);
+                    setError('Error loading movies for sections');
                     newSectionMovies[section] = []; // Handle errors by setting an empty array
+                }finally{
+                    setLoading(false);
                 }
             }
 
@@ -67,7 +85,7 @@ export const MoviesProvider = ({children})=>{
     }, []); // Empty dependency array ensures this runs only once
 
     return (
-    <MoviesContext.Provider value={{ sectionMovies, fetchMoviesByYear, fetchMoviesByYearAndCategory }}>
+    <MoviesContext.Provider value={{ sectionMovies, fetchMoviesByYear, fetchMoviesByYearAndCategory,loading, error }}>
         {children}
     </MoviesContext.Provider>
     );
