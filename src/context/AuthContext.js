@@ -94,6 +94,4 @@ export function AuthProvider({ children }) {
 
 export const useAuthContext = () => useContext(useAuthContext);
 
-export function useAuth() {
-  return useContext(AuthContext);
-}
+export default AuthContext;

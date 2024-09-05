@@ -1,9 +1,9 @@
-// src/components/RegisterPopup.js
 import React, {useState}from 'react';
 import { useHeaderContext } from '../context/HeaderContext';
 import '../styles/registerPopup.css';
 import config from '../config';
-import { useAuthContext } from '../context/AuthContext';
+import { useAuthContext } from "../context/AuthContext"
+
 
 function RegisterPopup() {
   const [username, setUsername] = useState('');
@@ -49,7 +49,7 @@ function RegisterPopup() {
           type="text" 
           required
           value={email}
-          onChange{(e)=> setEmail(e.target.value)}
+          onChange={(e)=>setEmail(e.target.value)}
         />
         <label>Enter your email</label>
       </div>
