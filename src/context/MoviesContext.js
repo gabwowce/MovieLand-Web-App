@@ -18,14 +18,6 @@ export const MoviesProvider = ({children})=>{
         }
       };
     
-    const fetchMoviesByYear = async (year) => {
-        try{
-            const response = await axios.get(`${config.baseURL}/movies/year/${year}`);
-            return response.data;
-        } catch (error) {
-            console.error('Error fetching movies by year:', error);
-        }
-    }
 
     const fetchMoviesByYearAndCategory = async (year, category) => {
         try{
