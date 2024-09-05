@@ -4,6 +4,7 @@ import '../styles/registerPopup.css';
 import config from '../config';
 import { useAuthContext } from "../context/AuthContext"
 
+
 function RegisterPopup() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
