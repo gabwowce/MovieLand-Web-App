@@ -1,12 +1,12 @@
 // src/components/LoginPopup.js
 import React, { useState } from 'react';
 import { useHeaderContext } from '../context/HeaderContext';
-import { useAuth } from '../context/AuthContext';
+import { useAuthContext } from '../context/AuthContext';
 import '../styles/registerPopup.css';
 
 function LoginPopup() {
   const { isPopupOpen, closePopup } = useHeaderContext();
-  const { login } = useAuth(); 
+  const { login } = useAuthContext(); 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
