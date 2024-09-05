@@ -12,11 +12,12 @@ import { useAuthContext } from '../context/AuthContext';
 
 function Header() {
 
-  const {user} = useAuthContext();
+  const {user, logout } = useAuthContext();
   
   const { openPopup } = useHeaderContext();
   const { isScrolled } = useScrollContext(); 
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isProfileMenuOpen, setProfileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleReviewGridWidth = () =>{
@@ -89,17 +90,39 @@ function Header() {
         <SearchBar/>
         <div className="menu">
           <ul className="menu-inner">
-            <li className="menu-item">
-              <Link to="/" className="menu-link">Home</Link>
-            </li>
-            <li className="menu-item">
-              <Link to="/movies" className="menu-link">Movies</Link>
-            </li>
-            <li className="menu-item">
-              <Link to="/about" className="menu-link">About</Link>
-            </li>
+            <li className="menu-item"><Link to="/" className="menu-link">Home</Link></li>
+            <li className="menu-item"><Link to="/movies" className="menu-link">Movies</Link></li>
+            <li className="menu-item"><Link to="/about" className="menu-link">About</Link></li>
+
+
+            {user ? (
+              <li className="menu-item profile-icon">
+                <span
+                  className="menu-link profile-link"
+                  onMouseEnter={() => setProfileMenuOpen(true)}
+                  onMouseLeave={() => setProfileMenuOpen(false)}
+                >
+                  Profile
+                </span>
+                {isProfileMenuOpen && (
+                  <ul className="profile-dropdown-menu">
+                    <li><Link to="/profile" className="menu-link">Profile</Link></li>
+                    <li><Link to="/movies" className="menu-link">Liked Movies</Link></li>
+                    <li><Link to="/comments" className="menu-link">Comments</Link></li>
+                    <li><Link to="/settings" className="menu-link">Settings</Link></li>
+                    <li><Link to="/" className="menu-link" onClick={logout}>Log Out</Link></li>
+                  </ul>
+                )}
+              </li>
+            ) : (
+              <li className="menu-item"><Link to="/about" className="menu-link">Log In</Link></li>
+            )}
+  
+
           </ul>
         </div>
+
+              
         <div className='navbar-icons'>
             <div className="search-icon">
               <img src={SearchIcon} alt='search icon'/>
@@ -109,19 +132,26 @@ function Header() {
               <span className="line"></span>
               <span className="line"></span>
             </div>
-        </div>
+        </div>    
       </nav>
+
+              
       <div className="menubar">
-      <ul>
-          <li>
-              <Link to="/" className="menu-link">Home</Link>
-          </li>
-          <li>
-              <Link to="/movies" className="menu-link">Movies</Link>
-          </li>
-          <li>
-              <Link to="/about" className="menu-link">About</Link>
-          </li>
+        <ul>
+          <li><Link to="/" className="menu-link">Home</Link></li>
+          <li><Link to="/movies" className="menu-link">Movies</Link></li>
+          <li><Link to="/about" className="menu-link">About</Link></li>
+          {user ? (
+            <>
+              <li><Link to="/profile" className="menu-link">Profile</Link></li>
+              <li><Link to="/movies" className="menu-link">Liked Movies</Link></li>
+              <li><Link to="/comments" className="menu-link">Comments</Link></li>
+              <li><Link to="/settings" className="menu-link">Settings</Link></li>
+              <li><Link to="/" className="menu-link" onClick={logout}>Log Out</Link></li>
+            </>
+          ) : (
+            <li><Link to="/about" className="menu-link">Log In</Link></li>
+          )}
         </ul>
       </div>
 
